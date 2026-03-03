@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Arisia Texture Pack</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #1a1a2e;
+      color: #e0e0e0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem 1rem;
+    }
+    header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    header h1 {
+      font-size: 2.5rem;
+      color: #e94560;
+      text-shadow: 0 0 12px rgba(233, 69, 96, 0.6);
+    }
+    header p {
+      margin-top: 0.5rem;
+      color: #a0a0c0;
+      font-size: 1rem;
+    }
+    .card {
+      background: #16213e;
+      border: 1px solid #0f3460;
+      border-radius: 10px;
+      padding: 1.5rem 2rem;
+      max-width: 700px;
+      width: 100%;
+      margin-bottom: 1.5rem;
+    }
+    .card h2 {
+      font-size: 1.2rem;
+      color: #e94560;
+      margin-bottom: 1rem;
+      border-bottom: 1px solid #0f3460;
+      padding-bottom: 0.4rem;
+    }
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+    .badge {
+      background: #0f3460;
+      color: #e0e0e0;
+      border-radius: 4px;
+      padding: 0.25rem 0.6rem;
+      font-size: 0.85rem;
+    }
+    .steps ol {
+      padding-left: 1.2rem;
+      line-height: 1.8;
+    }
+    .steps code {
+      background: #0f3460;
+      border-radius: 3px;
+      padding: 0.1rem 0.4rem;
+      font-size: 0.85rem;
+    }
+    .download-btn {
+      display: inline-block;
+      margin-top: 1.2rem;
+      padding: 0.75rem 2rem;
+      background: #e94560;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      font-weight: bold;
+      transition: background 0.2s;
+      cursor: pointer;
+      border: none;
+    }
+    .download-btn:hover { background: #c73652; }
+    #status {
+      margin-top: 0.75rem;
+      font-size: 0.9rem;
+      color: #a0a0c0;
+      min-height: 1.2em;
+    }
+    footer {
+      margin-top: 2rem;
+      color: #505070;
+      font-size: 0.8rem;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Arisia Texture Pack</h1>
+    <p>A comprehensive Minecraft resource pack — cosmetics, models, HUDs &amp; more</p>
+  </header>
+
+  <div class="card">
+    <h2>Pack Info</h2>
+    <div class="badge-row">
+      <span class="badge">Pack Format: 46</span>
+      <span class="badge">Minecraft 1.21.4+</span>
+      <span class="badge">File: arisia.zip</span>
+    </div>
+  </div>
+
+  <div class="card steps">
+    <h2>Installation</h2>
+    <ol>
+      <li>Download <strong>arisia.zip</strong> using the button below.</li>
+      <li>Place the file in your Minecraft <code>resourcepacks</code> folder:
+        <ul style="margin-top:0.4rem; padding-left:1.2rem; line-height:1.8;">
+          <li><strong>Windows:</strong> <code>%appdata%\.minecraft\resourcepacks\</code></li>
+          <li><strong>macOS:</strong> <code>~/Library/Application Support/minecraft/resourcepacks/</code></li>
+          <li><strong>Linux:</strong> <code>~/.minecraft/resourcepacks/</code></li>
+        </ul>
+      </li>
+      <li>Open Minecraft and go to <strong>Options → Resource Packs</strong>.</li>
+      <li>Enable <strong>Arisia</strong> and click <strong>Done</strong>.</li>
+    </ol>
+    <p style="margin-top:1rem; color:#a0a0c0; font-size:0.9rem;">
+      ℹ️ Full functionality requires compatible server-side plugins (ItemsAdder, ModelEngine).
+    </p>
+  </div>
+
+  <div class="card" style="text-align:center;">
+    <h2>Download</h2>
+    <button class="download-btn" id="downloadBtn">⬇ Download arisia.zip</button>
+    <p id="status"></p>
+  </div>
+
+  <footer>MrRedCoffee &mdash; Arisia Texture Pack</footer>
+
+  <script>
+    (function () {
+      var btn = document.getElementById('downloadBtn');
+      var status = document.getElementById('status');
+      var packFile = 'arisia.zip';
+
+      btn.addEventListener('click', function () {
+        status.textContent = 'Starting download…';
+        var link = document.createElement('a');
+        link.href = packFile;
+        link.download = packFile;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        setTimeout(function () {
+          status.textContent = 'Download started! Check your downloads folder.';
+        }, 500);
+      });
+    }());
+  </script>
+
+</body>
+</html>
