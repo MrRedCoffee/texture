@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Arisia Texture Pack</title>
+  <style>
+    /* ─── CSS custom properties (variables) for theming ─── */
+    :root,
+    [data-theme="dark"] {
+      --color-bg:           #0f1117;
+      --color-bg-card:      #1a1d27;
+      --color-bg-nav:       #13151f;
+      --color-border:       #2a2d3e;
+      --color-text:         #e2e8f0;
+      --color-text-muted:   #94a3b8;
+      --color-accent:       #7c3aed;
+      --color-accent-hover: #6d28d9;
+      --color-accent-glow:  rgba(124, 58, 237, 0.25);
+      --color-heading:      #f8fafc;
+      --color-tag-bg:       #2a2d3e;
+      --color-tag-text:     #a5b4fc;
+      --color-success:      #34d399;
+      --shadow-card:        0 4px 24px rgba(0, 0, 0, 0.5);
+      --radius-card:        12px;
+      --radius-btn:         8px;
+      --transition-speed:   0.2s;
+    }
+
+    [data-theme="light"] {
+      --color-bg:           #f1f5f9;
+      --color-bg-card:      #ffffff;
+      --color-bg-nav:       #e2e8f0;
+      --color-border:       #cbd5e1;
+      --color-text:         #1e293b;
+      --color-text-muted:   #64748b;
+      --color-accent:       #7c3aed;
+      --color-accent-hover: #6d28d9;
+      --color-accent-glow:  rgba(124, 58, 237, 0.15);
+      --color-heading:      #0f172a;
+      --color-tag-bg:       #e0e7ff;
+      --color-tag-text:     #4338ca;
+      --color-success:      #059669;
+      --shadow-card:        0 2px 12px rgba(0, 0, 0, 0.08);
+      --radius-card:        12px;
+      --radius-btn:         8px;
+      --transition-speed:   0.2s;
+    }
+
+    /* ─── Reset & base ─── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: var(--color-bg);
+      color: var(--color-text);
+      line-height: 1.6;
+      transition: background var(--transition-speed), color var(--transition-speed);
+    }
+
+    /* ─── Navigation ─── */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background: var(--color-bg-nav);
+      border-bottom: 1px solid var(--color-border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-brand {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--color-heading);
+      letter-spacing: -0.02em;
+    }
+
+    .nav-brand span {
+      color: var(--color-accent);
+    }
+
+    /* ─── Theme toggle button ─── */
+    #theme-toggle {
+      background: var(--color-bg-card);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-btn);
+      color: var(--color-text);
+      cursor: pointer;
+      font-size: 1.1rem;
+      padding: 0.4rem 0.75rem;
+      transition: background var(--transition-speed), border-color var(--transition-speed);
+    }
+
+    #theme-toggle:hover {
+      background: var(--color-border);
+    }
+
+    /* ─── Hero section ─── */
+    .hero {
+      text-align: center;
+      padding: 5rem 1.5rem 3rem;
+    }
+
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 800;
+      color: var(--color-heading);
+      letter-spacing: -0.03em;
+      margin-bottom: 1rem;
+    }
+
+    .hero h1 span {
+      color: var(--color-accent);
+    }
+
+    .hero p {
+      color: var(--color-text-muted);
+      font-size: 1.1rem;
+      max-width: 560px;
+      margin: 0 auto 2rem;
+    }
+
+    /* ─── Buttons ─── */
+    .btn {
+      display: inline-block;
+      padding: 0.75rem 1.75rem;
+      border-radius: var(--radius-btn);
+      font-size: 1rem;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background var(--transition-speed), box-shadow var(--transition-speed),
+                  transform var(--transition-speed);
+    }
+
+    .btn-primary {
+      background: var(--color-accent);
+      color: #ffffff;
+      border: none;
+      box-shadow: 0 0 0 0 var(--color-accent-glow);
+    }
+
+    .btn-primary:hover {
+      background: var(--color-accent-hover);
+      box-shadow: 0 0 20px var(--color-accent-glow);
+      transform: translateY(-1px);
+    }
+
+    /* ─── Main content ─── */
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 4rem;
+    }
+
+    /* ─── Section headings ─── */
+    .section-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--color-heading);
+      margin-bottom: 1.25rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--color-border);
+    }
+
+    /* ─── Info cards ─── */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 3rem;
+    }
+
+    .card {
+      background: var(--color-bg-card);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-card);
+      padding: 1.5rem;
+      box-shadow: var(--shadow-card);
+      transition: border-color var(--transition-speed), box-shadow var(--transition-speed);
+    }
+
+    .card:hover {
+      border-color: var(--color-accent);
+      box-shadow: var(--shadow-card), 0 0 0 1px var(--color-accent-glow);
+    }
+
+    .card-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--color-text-muted);
+      margin-bottom: 0.4rem;
+    }
+
+    .card-value {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--color-heading);
+    }
+
+    /* ─── Tags / namespace chips ─── */
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .tag {
+      background: var(--color-tag-bg);
+      color: var(--color-tag-text);
+      border-radius: 999px;
+      padding: 0.25rem 0.8rem;
+      font-size: 0.8rem;
+      font-weight: 500;
+    }
+
+    /* ─── Installation steps ─── */
+    .steps {
+      counter-reset: step-counter;
+      list-style: none;
+      margin-bottom: 3rem;
+    }
+
+    .steps li {
+      counter-increment: step-counter;
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .steps li::before {
+      content: counter(step-counter);
+      flex-shrink: 0;
+      width: 2rem;
+      height: 2rem;
+      border-radius: 50%;
+      background: var(--color-accent);
+      color: #ffffff;
+      font-size: 0.85rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .steps li span {
+      padding-top: 0.25rem;
+      color: var(--color-text);
+    }
+
+    code {
+      background: var(--color-tag-bg);
+      color: var(--color-tag-text);
+      border-radius: 4px;
+      padding: 0.1em 0.4em;
+      font-size: 0.9em;
+    }
+
+    /* ─── Footer ─── */
+    footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      color: var(--color-text-muted);
+      font-size: 0.875rem;
+      border-top: 1px solid var(--color-border);
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <span class="nav-brand">Arisia <span>Texture</span></span>
+    <button id="theme-toggle" aria-label="Toggle theme" title="Toggle light/dark theme">🌙</button>
+  </nav>
+
+  <section class="hero">
+    <h1>Arisia <span>Texture Pack</span></h1>
+    <p>A comprehensive Minecraft resource pack featuring custom cosmetics, models, HUDs, furniture, weapons, and more.</p>
+    <a class="btn btn-primary" href="arisia.zip" download>⬇ Download Pack</a>
+  </section>
+
+  <main>
+    <!-- Pack info cards -->
+    <h2 class="section-title">Pack Info</h2>
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-label">Pack Format</div>
+        <div class="card-value">46 &ndash; Minecraft 1.21.4+</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Overlays</div>
+        <div class="card-value">1.21.2+ &amp; 1.21.4+</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Asset Namespaces</div>
+        <div class="card-value">50+</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Total Files</div>
+        <div class="card-value">16,000+</div>
+      </div>
+    </div>
+
+    <!-- Content tags -->
+    <h2 class="section-title">Included Content</h2>
+    <div class="tag-list">
+      <span class="tag">Angel Wings</span>
+      <span class="tag">Backpacks</span>
+      <span class="tag">Balloons</span>
+      <span class="tag">Christmas</span>
+      <span class="tag">Cosmetics</span>
+      <span class="tag">Custom Crops</span>
+      <span class="tag">Custom Fishing</span>
+      <span class="tag">Demon Wings</span>
+      <span class="tag">Elite Creatures</span>
+      <span class="tag">Fantasy</span>
+      <span class="tag">Food Pack</span>
+      <span class="tag">Furniture</span>
+      <span class="tag">Games</span>
+      <span class="tag">Gem Set</span>
+      <span class="tag">Halloween</span>
+      <span class="tag">HUD (Happy &amp; Steampunk)</span>
+      <span class="tag">Kingdom</span>
+      <span class="tag">May 4th</span>
+      <span class="tag">Medieval Royal</span>
+      <span class="tag">ModelEngine</span>
+      <span class="tag">Nameplates</span>
+      <span class="tag">Custom Ores</span>
+      <span class="tag">Painter</span>
+      <span class="tag">Plushies</span>
+      <span class="tag">Pokémon Hats</span>
+      <span class="tag">Space</span>
+      <span class="tag">Swords &amp; Weapons</span>
+      <span class="tag">Train</span>
+      <span class="tag">Trophies</span>
+      <span class="tag">Valentine's</span>
+      <span class="tag">Warden Set</span>
+    </div>
+
+    <!-- Installation steps -->
+    <h2 class="section-title">Installation</h2>
+    <ol class="steps">
+      <li><span>Download <code>arisia.zip</code> using the button above.</span></li>
+      <li><span>Copy the file into your Minecraft <code>resourcepacks</code> folder:<br>
+        <strong>Windows:</strong> <code>%appdata%\.minecraft\resourcepacks\</code><br>
+        <strong>macOS:</strong> <code>~/Library/Application Support/minecraft/resourcepacks/</code><br>
+        <strong>Linux:</strong> <code>~/.minecraft/resourcepacks/</code>
+      </span></li>
+      <li><span>Launch Minecraft and go to <strong>Options → Resource Packs</strong>.</span></li>
+      <li><span>Enable <strong>Arisia</strong> from the available packs list and click <strong>Done</strong>.</span></li>
+    </ol>
+
+    <p style="color: var(--color-text-muted); font-size: 0.9rem;">
+      <strong>Note:</strong> Some assets require a server running compatible plugins such as ItemsAdder or ModelEngine.
+    </p>
+  </main>
+
+  <footer>
+    &copy; 2025 MrRedCoffee — Arisia Texture Pack
+  </footer>
+
+  <script>
+    const toggle = document.getElementById('theme-toggle');
+    const html = document.documentElement;
+
+    // Restore saved preference
+    const saved = localStorage.getItem('arisia-theme');
+    if (saved) {
+      html.setAttribute('data-theme', saved);
+      toggle.textContent = saved === 'light' ? '☀️' : '🌙';
+    }
+
+    toggle.addEventListener('click', () => {
+      const current = html.getAttribute('data-theme');
+      const next = current === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', next);
+      toggle.textContent = next === 'light' ? '☀️' : '🌙';
+      localStorage.setItem('arisia-theme', next);
+    });
+  </script>
+</body>
+</html>
